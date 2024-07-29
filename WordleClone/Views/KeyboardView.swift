@@ -12,9 +12,9 @@ struct KeyboardView: View {
 
     var body: some View {
         VStack {
-            ForEach(rows, id: \.self) { row in
+            ForEach(0..<rows.count) { rowIndex in
                 HStack(spacing: 2) {
-                    ForEach(row.map { String($0) }, id: \.self) { key in
+                    ForEach(rows[rowIndex].map { String($0) }, id: \.self) { key in
                         Button(action: {
                             game.addLetter(Character(key))
                             impactFeedbackGenerator.impactOccurred()
@@ -26,21 +26,19 @@ struct KeyboardView: View {
                                 .foregroundColor(.white)
                         }
                     }
+                    if rowIndex == rows.count - 1 {
+                        Button(action: {
+                            game.removeLetter()
+                            impactFeedbackGenerator.impactOccurred()
+                        }) {
+                            Image(systemName: "arrow.left")
+                                .font(.system(size: 18))
+                                .frame(width: 30, height: 40)
+                                .background(Color.gray)
+                                .foregroundColor(.white)
+                        }
+                    }
                 }
-            }
-            HStack {
-                Button("Delete") {
-                    game.removeLetter()
-                    impactFeedbackGenerator.impactOccurred()
-                }
-                .padding()
-                
-                Button("Submit") {
-                    game.submitGuess()
-                    impactFeedbackGenerator.impactOccurred()
-                }
-                .padding()
-                .disabled(game.getCurrentGuess().count != 5 || game.gameState != .playing)
             }
         }
     }
