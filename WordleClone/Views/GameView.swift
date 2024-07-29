@@ -23,6 +23,7 @@ struct GameView: View {
         return game.guessResults[row][col]
     }
 }
+import SwiftUI
 
 struct LetterView: View {
     let letter: Character?
@@ -33,9 +34,13 @@ struct LetterView: View {
             Rectangle()
                 .fill(backgroundColor)
                 .frame(width: 50, height: 50)
+                .overlay(
+                    Rectangle()
+                        .stroke(borderColor, lineWidth: 2)
+                )
             Text(letter.map(String.init) ?? "")
                 .font(.title)
-                .foregroundColor(.white)
+                .foregroundColor(.black)
         }
     }
 
@@ -48,7 +53,16 @@ struct LetterView: View {
         case .notInWord:
             return .gray
         case .notGuessed:
-            return .gray.opacity(0.3)
+            return .white
+        }
+    }
+
+    private var borderColor: Color {
+        switch result {
+        case .notGuessed:
+            return .black
+        default:
+            return .clear
         }
     }
 }
