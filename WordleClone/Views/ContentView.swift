@@ -5,6 +5,10 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
+            Text("Wordle Clone")
+                .font(.largeTitle)
+                .padding(.top)
+            
             if game.isGameOver {
                 GameOverView(gameState: game.gameState, targetWord: game.targetWord) {
                     game.resetGame()
