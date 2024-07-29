@@ -22,7 +22,7 @@ struct KeyboardView: View {
                             Text("Submit")
                                 .font(.system(size: 18))
                                 .frame(width: 60, height: 40)
-                                .background(Color.blue)
+                                .background(submitButtonColor)
                                 .foregroundColor(.white)
                         }
                         .disabled(game.getCurrentGuess().count != 5 || game.gameState != .playing)
@@ -56,6 +56,10 @@ struct KeyboardView: View {
                 }
             }
         }
+    }
+
+    private var submitButtonColor: Color {
+        return game.getCurrentGuess().count == 5 ? .blue : .gray
     }
 
     private func backgroundColor(for key: String) -> Color {
