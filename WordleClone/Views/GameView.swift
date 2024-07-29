@@ -24,4 +24,3 @@ struct GameView: View {
         return game.guessResults[row][col]
     }
 }
-

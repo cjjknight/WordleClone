@@ -8,7 +8,6 @@ class WordleGame: ObservableObject {
     @Published private(set) var guessResults: [[LetterResult]] = Array(repeating: [], count: 6)
     @Published var showInvalidGuessAlert = false
 
-    
     private let wordList: [String]
     private let maxGuesses = 6
     private var currentTargetWord: String
@@ -38,10 +37,10 @@ class WordleGame: ObservableObject {
     }
 
     func getCurrentGuess() -> String {
-            String(guesses[currentGuess].compactMap { $0 })
-        }
+        guard currentGuess < guesses.count else { return "" }
+        return String(guesses[currentGuess].compactMap { $0 })
+    }
 
-    
     func submitGuess() {
         let guess = getCurrentGuess()
         guard gameState == .playing, currentGuess < maxGuesses, guess.count == 5 else { return }
@@ -65,7 +64,6 @@ class WordleGame: ObservableObject {
         
         objectWillChange.send()
     }
-
 
     private func isValidGuess(_ guess: String) -> Bool {
         return wordList.contains(guess.lowercased())
@@ -103,7 +101,6 @@ class WordleGame: ObservableObject {
         
         return result
     }
-
 
     private func updateKeyboardState(for guess: String, with result: [LetterResult]) {
         for (letter, letterResult) in zip(guess, result) {
