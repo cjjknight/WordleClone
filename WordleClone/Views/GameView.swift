@@ -4,11 +4,12 @@ struct GameView: View {
     @ObservedObject var game: WordleGame
 
     var body: some View {
-        VStack(spacing: 5) {
+        VStack(spacing: 10) { // Adjust spacing
             ForEach(0..<6) { row in
-                HStack(spacing: 5) {
+                HStack(spacing: 10) { // Adjust spacing
                     ForEach(0..<5) { col in
                         LetterView(letter: game.guesses[row][col], result: getLetterResult(row: row, col: col))
+                            .frame(width: 60, height: 60) // Adjust size
                     }
                 }
             }
@@ -23,46 +24,4 @@ struct GameView: View {
         return game.guessResults[row][col]
     }
 }
-import SwiftUI
 
-struct LetterView: View {
-    let letter: Character?
-    let result: LetterResult
-
-    var body: some View {
-        ZStack {
-            Rectangle()
-                .fill(backgroundColor)
-                .frame(width: 50, height: 50)
-                .overlay(
-                    Rectangle()
-                        .stroke(borderColor, lineWidth: 2)
-                )
-            Text(letter.map(String.init) ?? "")
-                .font(.title)
-                .foregroundColor(.black)
-        }
-    }
-
-    private var backgroundColor: Color {
-        switch result {
-        case .correct:
-            return .green
-        case .wrongPosition:
-            return .yellow
-        case .notInWord:
-            return .gray
-        case .notGuessed:
-            return .white
-        }
-    }
-
-    private var borderColor: Color {
-        switch result {
-        case .notGuessed:
-            return .black
-        default:
-            return .clear
-        }
-    }
-}

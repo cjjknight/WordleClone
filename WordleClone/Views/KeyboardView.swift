@@ -11,9 +11,9 @@ struct KeyboardView: View {
     let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .light)
 
     var body: some View {
-        VStack {
+        VStack(spacing: 8) { // Adjust spacing
             ForEach(0..<rows.count) { rowIndex in
-                HStack(spacing: 2) {
+                HStack(spacing: 4) { // Adjust spacing
                     if rowIndex == rows.count - 1 {
                         Button(action: {
                             game.submitGuess()
@@ -21,7 +21,7 @@ struct KeyboardView: View {
                         }) {
                             Text("Submit")
                                 .font(.system(size: 18))
-                                .frame(width: 60, height: 40)
+                                .frame(width: 60, height: 45) // Adjust size
                                 .background(submitButtonColor)
                                 .foregroundColor(.white)
                         }
@@ -35,7 +35,7 @@ struct KeyboardView: View {
                         }) {
                             Text(key)
                                 .font(.system(size: 18))
-                                .frame(width: 30, height: 40)
+                                .frame(width: 30, height: 45) // Adjust size
                                 .background(backgroundColor(for: key))
                                 .foregroundColor(.white)
                         }
@@ -48,7 +48,7 @@ struct KeyboardView: View {
                         }) {
                             Image(systemName: "arrow.left")
                                 .font(.system(size: 18))
-                                .frame(width: 30, height: 40)
+                                .frame(width: 45, height: 45) // Adjust size
                                 .background(Color.gray)
                                 .foregroundColor(.white)
                         }
