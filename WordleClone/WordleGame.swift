@@ -72,21 +72,38 @@ class WordleGame: ObservableObject {
     }
 
     private func checkGuess(_ guess: String) -> [LetterResult] {
-        var result = [LetterResult]()
+        var result = [LetterResult](repeating: .notInWord, count: guess.count)
+        var letterCounts = [Character: Int]()
+
         let guessUppercased = guess.uppercased()
+        let targetWordArray = Array(targetWord)
+        let guessArray = Array(guessUppercased)
         
-        for (index, letter) in guessUppercased.enumerated() {
-            if letter == targetWord[targetWord.index(targetWord.startIndex, offsetBy: index)] {
-                result.append(.correct)
-            } else if targetWord.contains(letter) {
-                result.append(.wrongPosition)
-            } else {
-                result.append(.notInWord)
+        // First pass: Identify correct letters
+        for (index, letter) in guessArray.enumerated() {
+            if letter == targetWordArray[index] {
+                result[index] = .correct
+                letterCounts[letter, default: 0] += 1
+            }
+        }
+        
+        // Second pass: Identify wrong positions and count occurrences in target word
+        for (index, letter) in guessArray.enumerated() {
+            if result[index] != .correct {
+                if targetWordArray.contains(letter) {
+                    // Check if there are remaining occurrences of the letter in the target word
+                    let targetLetterCount = targetWordArray.filter { $0 == letter }.count
+                    if letterCounts[letter, default: 0] < targetLetterCount {
+                        result[index] = .wrongPosition
+                        letterCounts[letter, default: 0] += 1
+                    }
+                }
             }
         }
         
         return result
     }
+
 
     private func updateKeyboardState(for guess: String, with result: [LetterResult]) {
         for (letter, letterResult) in zip(guess, result) {
