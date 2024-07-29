@@ -6,7 +6,9 @@ class WordleGame: ObservableObject {
     @Published private(set) var keyboardState: [Character: LetterState] = [:]
     @Published private(set) var gameState: GameState = .playing
     @Published private(set) var guessResults: [[LetterResult]] = Array(repeating: [], count: 6)
+    @Published var showInvalidGuessAlert = false
 
+    
     private let wordList: [String]
     private let maxGuesses = 6
     private var currentTargetWord: String
@@ -41,28 +43,29 @@ class WordleGame: ObservableObject {
 
     
     func submitGuess() {
-         let guess = getCurrentGuess()
-         guard gameState == .playing, currentGuess < maxGuesses, guess.count == 5 else { return }
-         
-         guard isValidGuess(guess) else {
-             // Handle invalid guess (e.g., show an alert)
-             objectWillChange.send()
-             return
-         }
-         
-         let result = checkGuess(guess)
-         guessResults[currentGuess] = result
-         updateKeyboardState(for: guess, with: result)
-         currentGuess += 1
-         
-         if guess.uppercased() == targetWord {
-             gameState = .won
-         } else if currentGuess == maxGuesses {
-             gameState = .lost
-         }
-         
-         objectWillChange.send()
-     }
+        let guess = getCurrentGuess()
+        guard gameState == .playing, currentGuess < maxGuesses, guess.count == 5 else { return }
+        
+        guard isValidGuess(guess) else {
+            // Handle invalid guess (e.g., show an alert)
+            showInvalidGuessAlert = true
+            return
+        }
+        
+        let result = checkGuess(guess)
+        guessResults[currentGuess] = result
+        updateKeyboardState(for: guess, with: result)
+        currentGuess += 1
+        
+        if guess.uppercased() == targetWord {
+            gameState = .won
+        } else if currentGuess == maxGuesses {
+            gameState = .lost
+        }
+        
+        objectWillChange.send()
+    }
+
 
     private func isValidGuess(_ guess: String) -> Bool {
         return wordList.contains(guess.lowercased())
