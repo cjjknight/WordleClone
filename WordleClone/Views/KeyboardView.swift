@@ -9,6 +9,7 @@ struct KeyboardView: View {
         "ZXCVBNM"
     ]
     let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .light)
+    let lightGrey = Color(UIColor.systemGray5) // Lighter shade of grey
 
     var body: some View {
         VStack(spacing: 8) { // Adjust spacing
@@ -23,7 +24,7 @@ struct KeyboardView: View {
                                 .font(.system(size: 18))
                                 .frame(width: 60, height: 45) // Adjust size
                                 .background(submitButtonColor)
-                                .foregroundColor(.white)
+                                .foregroundColor(submitButtonColor == .blue ? .white : .black)
                         }
                         .disabled(game.getCurrentGuess().count != 5 || game.gameState != .playing)
                     }
@@ -37,7 +38,7 @@ struct KeyboardView: View {
                                 .font(.system(size: 18))
                                 .frame(width: 30, height: 45) // Adjust size
                                 .background(backgroundColor(for: key))
-                                .foregroundColor(.white)
+                                .foregroundColor(textColor(for: key))
                         }
                     }
                     
@@ -49,8 +50,8 @@ struct KeyboardView: View {
                             Image(systemName: "arrow.left")
                                 .font(.system(size: 18))
                                 .frame(width: 45, height: 45) // Adjust size
-                                .background(Color.gray)
-                                .foregroundColor(.white)
+                                .background(lightGrey)
+                                .foregroundColor(.black)
                         }
                     }
                 }
@@ -59,16 +60,25 @@ struct KeyboardView: View {
     }
 
     private var submitButtonColor: Color {
-        return game.getCurrentGuess().count == 5 ? .blue : .gray
+        return game.getCurrentGuess().count == 5 ? .blue : lightGrey
     }
 
     private func backgroundColor(for key: String) -> Color {
         switch game.keyboardState[Character(key)] {
-        case .unused: return .gray
+        case .unused: return lightGrey // Default color
         case .wrongPosition: return .yellow
         case .notInWord: return .black
         case .correct: return .green
-        case .none: return .gray
+        case .none: return lightGrey // Default color
+        }
+    }
+
+    private func textColor(for key: String) -> Color {
+        let bgColor = backgroundColor(for: key)
+        if bgColor == .yellow || bgColor == .black || bgColor == .green {
+            return .white
+        } else {
+            return .black
         }
     }
 }
