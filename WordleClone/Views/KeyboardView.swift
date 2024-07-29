@@ -14,6 +14,20 @@ struct KeyboardView: View {
         VStack {
             ForEach(0..<rows.count) { rowIndex in
                 HStack(spacing: 2) {
+                    if rowIndex == rows.count - 1 {
+                        Button(action: {
+                            game.submitGuess()
+                            impactFeedbackGenerator.impactOccurred()
+                        }) {
+                            Text("Submit")
+                                .font(.system(size: 18))
+                                .frame(width: 60, height: 40)
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                        }
+                        .disabled(game.getCurrentGuess().count != 5 || game.gameState != .playing)
+                    }
+                    
                     ForEach(rows[rowIndex].map { String($0) }, id: \.self) { key in
                         Button(action: {
                             game.addLetter(Character(key))
@@ -26,6 +40,7 @@ struct KeyboardView: View {
                                 .foregroundColor(.white)
                         }
                     }
+                    
                     if rowIndex == rows.count - 1 {
                         Button(action: {
                             game.removeLetter()

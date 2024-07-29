@@ -12,14 +12,6 @@ struct ContentView: View {
             } else {
                 GameView(game: game)
                 KeyboardView(game: game)
-                
-                Button("Submit") {
-                    if game.getCurrentGuess().count == 5 {
-                        game.submitGuess()
-                    }
-                }
-                .padding()
-                .disabled(game.getCurrentGuess().count != 5 || game.gameState != .playing)
             }
         }
         .alert("Invalid Word", isPresented: $game.showInvalidGuessAlert) {
