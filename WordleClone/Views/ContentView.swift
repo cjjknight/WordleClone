@@ -9,12 +9,13 @@ struct ContentView: View {
                 .font(.largeTitle)
                 .padding(.top)
             
+            GameView(game: game)
+            
             if game.isGameOver {
                 GameOverView(gameState: game.gameState, targetWord: game.targetWord) {
                     game.resetGame()
                 }
             } else {
-                GameView(game: game)
                 KeyboardView(game: game)
             }
         }
