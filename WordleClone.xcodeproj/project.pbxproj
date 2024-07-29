@@ -23,6 +23,8 @@
 		8BE84CE12C584E5400DE039D /* sgb-words.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8BE84CE02C584E5400DE039D /* sgb-words.txt */; };
 		8BE84CE32C58504B00DE039D /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE84CE22C58504B00DE039D /* GameOverView.swift */; };
 		8BE84CE62C5855FA00DE039D /* LetterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE84CE52C5855FA00DE039D /* LetterView.swift */; };
+		8BE84CE82C585D6000DE039D /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE84CE72C585D6000DE039D /* Statistics.swift */; };
+		8BE84CEA2C585D9C00DE039D /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE84CE92C585D9C00DE039D /* StatisticsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,8 @@
 		8BE84CE02C584E5400DE039D /* sgb-words.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sgb-words.txt"; sourceTree = SOURCE_ROOT; };
 		8BE84CE22C58504B00DE039D /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
 		8BE84CE52C5855FA00DE039D /* LetterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterView.swift; sourceTree = "<group>"; };
+		8BE84CE72C585D6000DE039D /* Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistics.swift; sourceTree = "<group>"; };
+		8BE84CE92C585D9C00DE039D /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +121,7 @@
 				8B7B77362C4431F9000E67FE /* Item.swift */,
 				8B7B77612C4432E5000E67FE /* WordleGame.swift */,
 				8B7B77652C44330A000E67FE /* WordList.swift */,
+				8BE84CE72C585D6000DE039D /* Statistics.swift */,
 				8B7B77632C4432FA000E67FE /* ViewController.swift */,
 				8BE84CE42C5850E300DE039D /* Views */,
 				8BE84CE02C584E5400DE039D /* sgb-words.txt */,
@@ -156,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				8B7B77342C4431F9000E67FE /* ContentView.swift */,
+				8BE84CE92C585D9C00DE039D /* StatisticsView.swift */,
 				8B7B77672C4433FA000E67FE /* GameView.swift */,
 				8BE84CE22C58504B00DE039D /* GameOverView.swift */,
 				8BE84CE52C5855FA00DE039D /* LetterView.swift */,
@@ -296,7 +302,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B7B77642C4432FA000E67FE /* ViewController.swift in Sources */,
+				8BE84CEA2C585D9C00DE039D /* StatisticsView.swift in Sources */,
 				8B7B776A2C44340A000E67FE /* KeyboardView.swift in Sources */,
+				8BE84CE82C585D6000DE039D /* Statistics.swift in Sources */,
 				8B7B77352C4431F9000E67FE /* ContentView.swift in Sources */,
 				8B7B77372C4431F9000E67FE /* Item.swift in Sources */,
 				8BE84CE62C5855FA00DE039D /* LetterView.swift in Sources */,

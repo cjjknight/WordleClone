@@ -1,7 +1,16 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var game = WordleGame(wordList: WordList.words)
+    @StateObject private var statistics = Statistics()
+    @StateObject private var game: WordleGame
+    
+    init() {
+        let stats = Statistics()
+        _statistics = StateObject(wrappedValue: stats)
+        _game = StateObject(wrappedValue: WordleGame(wordList: WordList.words, statistics: stats))
+    }
+
+    @State private var showingStatistics = false
 
     var body: some View {
         VStack {
@@ -17,6 +26,14 @@ struct ContentView: View {
                 }
             } else {
                 KeyboardView(game: game)
+            }
+            
+            Button("Statistics") {
+                showingStatistics.toggle()
+            }
+            .padding()
+            .sheet(isPresented: $showingStatistics) {
+                StatisticsView(statistics: statistics)
             }
         }
         .alert("Invalid Word", isPresented: $game.showInvalidGuessAlert) {

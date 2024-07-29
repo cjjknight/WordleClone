@@ -1,5 +1,17 @@
 import Foundation
 
+enum LetterResult {
+    case correct, wrongPosition, notInWord, notGuessed
+}
+
+enum LetterState {
+    case unused, wrongPosition, notInWord, correct
+}
+
+enum GameState {
+    case playing, won, lost
+}
+
 class WordleGame: ObservableObject {
     @Published private(set) var currentGuess = 0
     @Published private(set) var guesses: [[Character?]] = Array(repeating: Array(repeating: nil, count: 5), count: 6)
@@ -7,6 +19,8 @@ class WordleGame: ObservableObject {
     @Published private(set) var gameState: GameState = .playing
     @Published private(set) var guessResults: [[LetterResult]] = Array(repeating: [], count: 6)
     @Published var showInvalidGuessAlert = false
+
+    let statistics: Statistics
 
     private let wordList: [String]
     private let maxGuesses = 6
@@ -16,8 +30,9 @@ class WordleGame: ObservableObject {
         currentTargetWord
     }
 
-    init(wordList: [String]) {
+    init(wordList: [String], statistics: Statistics) {
         self.wordList = wordList
+        self.statistics = statistics
         self.currentTargetWord = wordList.randomElement()?.uppercased() ?? "SWIFT"
         resetKeyboardState()
     }
@@ -46,7 +61,6 @@ class WordleGame: ObservableObject {
         guard gameState == .playing, currentGuess < maxGuesses, guess.count == 5 else { return }
         
         guard isValidGuess(guess) else {
-            // Handle invalid guess (e.g., show an alert)
             showInvalidGuessAlert = true
             return
         }
@@ -58,8 +72,10 @@ class WordleGame: ObservableObject {
         
         if guess.uppercased() == targetWord {
             gameState = .won
+            statistics.gamePlayed(didWin: true)
         } else if currentGuess == maxGuesses {
             gameState = .lost
+            statistics.gamePlayed(didWin: false)
         }
         
         objectWillChange.send()
@@ -89,7 +105,6 @@ class WordleGame: ObservableObject {
         for (index, letter) in guessArray.enumerated() {
             if result[index] != .correct {
                 if targetWordArray.contains(letter) {
-                    // Check if there are remaining occurrences of the letter in the target word
                     let targetLetterCount = targetWordArray.filter { $0 == letter }.count
                     if letterCounts[letter, default: 0] < targetLetterCount {
                         result[index] = .wrongPosition
@@ -140,16 +155,4 @@ class WordleGame: ObservableObject {
         gameState = .playing
         currentTargetWord = wordList.randomElement()?.uppercased() ?? "SWIFT"
     }
-}
-
-enum LetterResult {
-    case correct, wrongPosition, notInWord, notGuessed
-}
-
-enum LetterState {
-    case unused, wrongPosition, notInWord, correct
-}
-
-enum GameState {
-    case playing, won, lost
 }

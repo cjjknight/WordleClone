@@ -7,6 +7,7 @@ class ViewController: UIViewController {
     
     private let gridStackView = UIStackView()
     private let keyboardStackView = UIStackView()
+    private let statistics = Statistics() // Initialize Statistics
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,7 +16,7 @@ class ViewController: UIViewController {
     }
 
     private func setupGame() {
-        game = WordleGame(wordList: WordList.words)
+        game = WordleGame(wordList: WordList.words, statistics: statistics) // Pass Statistics instance
     }
 
     private func setupUI() {
