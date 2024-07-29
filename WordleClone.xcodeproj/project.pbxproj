@@ -20,7 +20,8 @@
 		8B7B77662C44330A000E67FE /* WordList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B77652C44330A000E67FE /* WordList.swift */; };
 		8B7B77682C4433FA000E67FE /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B77672C4433FA000E67FE /* GameView.swift */; };
 		8B7B776A2C44340A000E67FE /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B77692C44340A000E67FE /* KeyboardView.swift */; };
-		8B7B776C2C443823000E67FE /* sgb-words.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8B7B776B2C443823000E67FE /* sgb-words.txt */; };
+		8BE84CE12C584E5400DE039D /* sgb-words.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8BE84CE02C584E5400DE039D /* sgb-words.txt */; };
+		8BE84CE32C58504B00DE039D /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE84CE22C58504B00DE039D /* GameOverView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,7 +59,8 @@
 		8B7B77652C44330A000E67FE /* WordList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordList.swift; sourceTree = "<group>"; };
 		8B7B77672C4433FA000E67FE /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		8B7B77692C44340A000E67FE /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
-		8B7B776B2C443823000E67FE /* sgb-words.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "sgb-words.txt"; path = "../../../sgb-words.txt"; sourceTree = "<group>"; };
+		8BE84CE02C584E5400DE039D /* sgb-words.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sgb-words.txt"; sourceTree = SOURCE_ROOT; };
+		8BE84CE22C58504B00DE039D /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,14 +112,12 @@
 			isa = PBXGroup;
 			children = (
 				8B7B77322C4431F9000E67FE /* WordleCloneApp.swift */,
-				8B7B77342C4431F9000E67FE /* ContentView.swift */,
 				8B7B77362C4431F9000E67FE /* Item.swift */,
-				8B7B77672C4433FA000E67FE /* GameView.swift */,
 				8B7B77612C4432E5000E67FE /* WordleGame.swift */,
-				8B7B77692C44340A000E67FE /* KeyboardView.swift */,
 				8B7B77652C44330A000E67FE /* WordList.swift */,
-				8B7B776B2C443823000E67FE /* sgb-words.txt */,
 				8B7B77632C4432FA000E67FE /* ViewController.swift */,
+				8BE84CE42C5850E300DE039D /* Views */,
+				8BE84CE02C584E5400DE039D /* sgb-words.txt */,
 				8B7B77382C4431FA000E67FE /* Assets.xcassets */,
 				8B7B773A2C4431FA000E67FE /* WordleClone.entitlements */,
 				8B7B773B2C4431FA000E67FE /* Preview Content */,
@@ -148,6 +148,17 @@
 				8B7B77522C4431FA000E67FE /* WordleCloneUITestsLaunchTests.swift */,
 			);
 			path = WordleCloneUITests;
+			sourceTree = "<group>";
+		};
+		8BE84CE42C5850E300DE039D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8B7B77342C4431F9000E67FE /* ContentView.swift */,
+				8B7B77672C4433FA000E67FE /* GameView.swift */,
+				8BE84CE22C58504B00DE039D /* GameOverView.swift */,
+				8B7B77692C44340A000E67FE /* KeyboardView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,7 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B7B773D2C4431FA000E67FE /* Preview Assets.xcassets in Resources */,
-				8B7B776C2C443823000E67FE /* sgb-words.txt in Resources */,
+				8BE84CE12C584E5400DE039D /* sgb-words.txt in Resources */,
 				8B7B77392C4431FA000E67FE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -288,6 +299,7 @@
 				8B7B77622C4432E5000E67FE /* WordleGame.swift in Sources */,
 				8B7B77332C4431F9000E67FE /* WordleCloneApp.swift in Sources */,
 				8B7B77662C44330A000E67FE /* WordList.swift in Sources */,
+				8BE84CE32C58504B00DE039D /* GameOverView.swift in Sources */,
 				8B7B77682C4433FA000E67FE /* GameView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

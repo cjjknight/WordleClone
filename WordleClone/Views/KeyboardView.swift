@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct KeyboardView: View {
     @ObservedObject var game: WordleGame
@@ -7,6 +8,7 @@ struct KeyboardView: View {
         "ASDFGHJKL",
         "ZXCVBNM"
     ]
+    let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .light)
 
     var body: some View {
         VStack {
@@ -15,6 +17,7 @@ struct KeyboardView: View {
                     ForEach(row.map { String($0) }, id: \.self) { key in
                         Button(action: {
                             game.addLetter(Character(key))
+                            impactFeedbackGenerator.impactOccurred()
                         }) {
                             Text(key)
                                 .font(.system(size: 18))
@@ -28,11 +31,13 @@ struct KeyboardView: View {
             HStack {
                 Button("Delete") {
                     game.removeLetter()
+                    impactFeedbackGenerator.impactOccurred()
                 }
                 .padding()
                 
                 Button("Submit") {
                     game.submitGuess()
+                    impactFeedbackGenerator.impactOccurred()
                 }
                 .padding()
                 .disabled(game.getCurrentGuess().count != 5 || game.gameState != .playing)
