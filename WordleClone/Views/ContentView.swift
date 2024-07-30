@@ -13,33 +13,52 @@ struct ContentView: View {
     @State private var showingStatistics = false
 
     var body: some View {
-        VStack {
-            Text("Wordle Clone")
-                .font(.largeTitle)
-                .padding(.top)
-            
-            GameView(game: game)
-            
-            if game.isGameOver {
-                GameOverView(gameState: game.gameState, targetWord: game.targetWord) {
-                    game.resetGame()
+        GeometryReader { geometry in
+            VStack {
+                HStack {
+                    Button(action: {
+                        showingStatistics.toggle()
+                    }) {
+                        Image(systemName: "chart.bar") // Use the system icon for simplicity or your custom icon name here
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .padding()
+                    }
+                    Spacer()
                 }
-            } else {
-                KeyboardView(game: game)
+                
+                Text("Wordle Clone")
+                    .font(.largeTitle)
+                    .padding(.top)
+                
+                Spacer()
+                
+                GameView(game: game)
+                    .frame(height: geometry.size.height * 0.5) // Allocate 50% of the height for the game view
+                    .padding()
+                
+                if game.isGameOver {
+                    GameOverView(gameState: game.gameState, targetWord: game.targetWord) {
+                        game.resetGame()
+                    }
+                    .frame(height: geometry.size.height * 0.2) // Allocate 20% of the height for the game over view
+                    .padding()
+                } else {
+                    KeyboardView(game: game)
+                        .frame(height: geometry.size.height * 0.2) // Allocate 20% of the height for the keyboard view
+                        .padding(.bottom)
+                }
+                
+                Spacer()
             }
-            
-            Button("Statistics") {
-                showingStatistics.toggle()
-            }
-            .padding()
             .sheet(isPresented: $showingStatistics) {
                 StatisticsView(statistics: statistics)
             }
-        }
-        .alert("Invalid Word", isPresented: $game.showInvalidGuessAlert) {
-            Button("OK", role: .cancel) { }
-        } message: {
-            Text("The word you entered is not in our dictionary. Please try again.")
+            .alert("Invalid Word", isPresented: $game.showInvalidGuessAlert) {
+                Button("OK", role: .cancel) { }
+            } message: {
+                Text("The word you entered is not in our dictionary. Please try again.")
+            }
         }
     }
 }

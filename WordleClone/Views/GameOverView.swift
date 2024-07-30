@@ -10,11 +10,13 @@ struct GameOverView: View {
             if gameState == .won {
                 Text("Congratulations! You won!")
                     .font(.largeTitle)
-                    .padding()
+                    .minimumScaleFactor(0.5) // Allow text to shrink
+                    .lineLimit(1) // Ensure text doesn't wrap
             } else {
                 Text("Game Over! The word was \(targetWord)")
                     .font(.largeTitle)
-                    .padding()
+                    .minimumScaleFactor(0.5) // Allow text to shrink
+                    .lineLimit(1) // Ensure text doesn't wrap
             }
             Button("Play Again", action: onRestart)
                 .padding()
