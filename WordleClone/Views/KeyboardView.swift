@@ -19,11 +19,10 @@ struct KeyboardView: View {
                             game.submitGuess()
                             impactFeedbackGenerator.impactOccurred()
                         }) {
-                            Text("Submit")
-                                .font(.system(size: 18))
-                                .frame(width: 60, height: 45) // Adjust size
-                                .background(submitButtonColor)
-                                .foregroundColor(submitButtonColor == .blue ? .white : .black)
+                            Image(systemName: "checkmark.circle.fill")
+                                .resizable()
+                                .frame(width: 45, height: 45) // Adjust size
+                                .foregroundColor(submitButtonColor)
                         }
                         .disabled(game.getCurrentGuess().count != 5 || game.gameState != .playing)
                     }
@@ -46,7 +45,7 @@ struct KeyboardView: View {
                             game.removeLetter()
                             impactFeedbackGenerator.impactOccurred()
                         }) {
-                            Image(systemName: "arrow.left")
+                            Image(systemName: "delete.left.fill")
                                 .font(.system(size: 18))
                                 .frame(width: 45, height: 45) // Adjust size
                                 .background(lightGrey)
