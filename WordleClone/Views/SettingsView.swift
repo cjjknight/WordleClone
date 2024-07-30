@@ -1,8 +1,14 @@
-//
-//  SettingsView.swift
-//  WordleClone
-//
-//  Created by Christopher Johnson on 7/30/24.
-//
+import SwiftUI
 
-import Foundation
+struct SettingsView: View {
+    var body: some View {
+        VStack {
+            Text("Settings")
+                .font(.largeTitle)
+                .padding()
+            // Add your settings options here
+            Spacer()
+        }
+        .padding()
+    }
+}

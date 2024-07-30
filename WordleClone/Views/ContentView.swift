@@ -4,13 +4,14 @@ struct ContentView: View {
     @StateObject private var statistics = Statistics()
     @StateObject private var game: WordleGame
     
+    @State private var showingStatistics = false
+    @State private var showingSettings = false
+
     init() {
         let stats = Statistics()
         _statistics = StateObject(wrappedValue: stats)
         _game = StateObject(wrappedValue: WordleGame(wordList: WordList.words, statistics: stats))
     }
-
-    @State private var showingStatistics = false
 
     var body: some View {
         GeometryReader { geometry in
@@ -25,6 +26,14 @@ struct ContentView: View {
                             .padding()
                     }
                     Spacer()
+                    Button(action: {
+                        showingSettings.toggle()
+                    }) {
+                        Image(systemName: "gearshape.fill") // Settings icon
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .padding()
+                    }
                 }
                 
                 Text("Wordle Clone")
@@ -53,6 +62,9 @@ struct ContentView: View {
             }
             .sheet(isPresented: $showingStatistics) {
                 StatisticsView(statistics: statistics)
+            }
+            .sheet(isPresented: $showingSettings) {
+                SettingsView() // Ensure you have a SettingsView to present
             }
             .alert("Invalid Word", isPresented: $game.showInvalidGuessAlert) {
                 Button("OK", role: .cancel) { }
