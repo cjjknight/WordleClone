@@ -64,7 +64,7 @@ struct ContentView: View {
                 StatisticsView(statistics: statistics)
             }
             .sheet(isPresented: $showingSettings) {
-                SettingsView() // Ensure you have a SettingsView to present
+                SettingsView()
             }
             .alert("Invalid Word", isPresented: $game.showInvalidGuessAlert) {
                 Button("OK", role: .cancel) { }
